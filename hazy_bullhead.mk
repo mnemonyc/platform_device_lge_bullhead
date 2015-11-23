@@ -24,6 +24,15 @@ PRODUCT_COPY_FILES := device/lge/bullhead/apns-full-conf.xml:system/etc/apns-con
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
+# Inherit some common Hazy stuff.
+$(call inherit-product, vendor/hazy/configs/common_full_phone.mk)
+
+# Enhanced NFC
+$(call inherit-product, vendor/hazy/configs/nfc_enhanced.mk)
+
+# Inherit from our Hazy product configuration
+$(call inherit-product, vendor/hazy/configs/common.mk)
+
 PRODUCT_NAME := hazy_bullhead
 PRODUCT_DEVICE := bullhead
 PRODUCT_BRAND := Google
