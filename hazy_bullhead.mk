@@ -14,34 +14,18 @@
 # limitations under the License.
 #
 
-# Sample: This is where we'd set a backup provider if we had one
-# $(call inherit-product, device/sample/products/backup_overlay.mk)
-
-# Get the long list of APNs
-PRODUCT_COPY_FILES := device/lge/bullhead/apns-full-conf.xml:system/etc/apns-conf.xml
-
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-
-# Inherit some common Hazy stuff.
-$(call inherit-product, vendor/hazy/configs/common_full_phone.mk)
-
-# Enhanced NFC
-$(call inherit-product, vendor/hazy/configs/nfc_enhanced.mk)
+# Inherit AOSP device configuration for bullhead.
+$(call inherit-product, device/lge/bullhead/aosp_bullhead.mk)
 
 # Inherit from our Hazy product configuration
-$(call inherit-product, vendor/hazy/configs/common.mk)
+include vendor/hazy/main.mk
 
 PRODUCT_NAME := hazy_bullhead
 PRODUCT_DEVICE := bullhead
 PRODUCT_BRAND := Google
 PRODUCT_MODEL := Nexus 5X
 PRODUCT_MANUFACTURER := LGE
-TARGET_VENDOR := lge
 
-$(call inherit-product, device/lge/bullhead/device.mk)
-$(call inherit-product-if-exists, vendor/lge/bullhead/device-vendor.mk)
-
-PRODUCT_PACKAGES += \
-    Launcher3
+# Boot animation
+PRODUCT_COPY_FILES += \
+    vendor/hazy/prebuilt/bootanimation/hazy.zip:system/media/bootanimation.zip
